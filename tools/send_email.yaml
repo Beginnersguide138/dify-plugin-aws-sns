@@ -1,0 +1,91 @@
+identity:
+  name: "send_email"
+  author: "beginnersguide138"
+  label:
+    en_US: "Send Email via SNS"
+    ja_JP: "SNS経由でメール送信"
+    zh_Hans: "通过SNS发送邮件"
+    pt_BR: "Enviar E-mail via SNS"
+description:
+  human:
+    en_US: "Send email notifications using AWS SNS service"
+    ja_JP: "AWS SNSサービスを使用してメール通知を送信します"
+    zh_Hans: "使用AWS SNS服务发送电子邮件通知"
+    pt_BR: "Enviar notificações por e-mail usando o serviço AWS SNS"
+  llm: "Send email notifications through AWS SNS. This tool publishes messages to SNS topics or sends direct emails to subscribers."
+parameters:
+  - name: topic_arn
+    type: string
+    required: false
+    label:
+      en_US: "SNS Topic ARN"
+      ja_JP: "SNS トピック ARN"
+      zh_Hans: "SNS主题ARN"
+      pt_BR: "ARN do Tópico SNS"
+    human_description:
+      en_US: "The ARN of the SNS topic to publish to (optional if email is provided)"
+      ja_JP: "パブリッシュするSNSトピックのARN（メールアドレスが提供される場合はオプション）"
+      zh_Hans: "要发布到的SNS主题ARN（如果提供了电子邮件则为可选）"
+      pt_BR: "O ARN do tópico SNS para publicar (opcional se o e-mail for fornecido)"
+    llm_description: "The Amazon Resource Name (ARN) of the SNS topic to publish the message to. Format: arn:aws:sns:region:account-id:topic-name. Either topic_arn or email must be provided."
+    form: llm
+  - name: email
+    type: string
+    required: false
+    label:
+      en_US: "Email Address"
+      ja_JP: "メールアドレス"
+      zh_Hans: "电子邮件地址"
+      pt_BR: "Endereço de E-mail"
+    human_description:
+      en_US: "Email address to send notification to directly (optional if topic_arn is provided)"
+      ja_JP: "直接通知を送信するメールアドレス（topic_arnが提供される場合はオプション）"
+      zh_Hans: "直接发送通知的电子邮件地址（如果提供了topic_arn则为可选）"
+      pt_BR: "Endereço de e-mail para enviar notificação diretamente (opcional se topic_arn for fornecido)"
+    llm_description: "The email address to send the notification to directly. Either topic_arn or email must be provided."
+    form: llm
+  - name: subject
+    type: string
+    required: true
+    label:
+      en_US: "Email Subject"
+      ja_JP: "メールの件名"
+      zh_Hans: "邮件主题"
+      pt_BR: "Assunto do E-mail"
+    human_description:
+      en_US: "The subject line of the email"
+      ja_JP: "メールの件名行"
+      zh_Hans: "电子邮件的主题行"
+      pt_BR: "A linha de assunto do e-mail"
+    llm_description: "The subject line for the email notification"
+    form: llm
+  - name: message
+    type: string
+    required: true
+    label:
+      en_US: "Message Body"
+      ja_JP: "メッセージ本文"
+      zh_Hans: "消息正文"
+      pt_BR: "Corpo da Mensagem"
+    human_description:
+      en_US: "The body of the email message"
+      ja_JP: "メールメッセージの本文"
+      zh_Hans: "电子邮件消息的正文"
+      pt_BR: "O corpo da mensagem de e-mail"
+    llm_description: "The main content of the email notification"
+    form: llm
+extra:
+  python:
+    source: tools/send_email.py
+output_schema:
+  type: object
+  properties:
+    success:
+      type: boolean
+      description: "Whether the email was sent successfully"
+    message_id:
+      type: string
+      description: "The unique ID of the sent message"
+    status:
+      type: string
+      description: "Status message describing the result"

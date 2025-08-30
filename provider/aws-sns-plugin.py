@@ -1,4 +1,6 @@
 from typing import Any
+import boto3
+from botocore.exceptions import ClientError, BotoCoreError
 
 from dify_plugin import ToolProvider
 from dify_plugin.errors.tool import ToolProviderCredentialValidationError
@@ -8,9 +10,43 @@ class AwsSnsPluginProvider(ToolProvider):
     
     def _validate_credentials(self, credentials: dict[str, Any]) -> None:
         try:
-            """
-            IMPLEMENT YOUR VALIDATION HERE
-            """
+            # 必須認証情報を取得
+            aws_access_key_id = credentials.get("aws_access_key_id", "")
+            aws_secret_access_key = credentials.get("aws_secret_access_key", "")
+            aws_region = credentials.get("aws_region", "")
+            
+            # 認証情報の検証
+            if not aws_access_key_id:
+                raise ToolProviderCredentialValidationError("AWS Access Key ID is required")
+            if not aws_secret_access_key:
+                raise ToolProviderCredentialValidationError("AWS Secret Access Key is required")
+            if not aws_region:
+                raise ToolProviderCredentialValidationError("AWS Region is required")
+            
+            # AWS SNSクライアントを作成して認証情報をテスト
+            sns_client = boto3.client(
+                'sns',
+                aws_access_key_id=aws_access_key_id,
+                aws_secret_access_key=aws_secret_access_key,
+                region_name=aws_region
+            )
+            
+            # 認証情報の有効性を確認（トピック一覧を取得）
+            # list_topicsを呼び出して認証情報が有効かを確認
+            sns_client.list_topics()
+            
+        except ClientError as e:
+            error_code = e.response['Error']['Code']
+            if error_code == 'InvalidClientTokenId':
+                raise ToolProviderCredentialValidationError("Invalid AWS Access Key ID")
+            elif error_code == 'SignatureDoesNotMatch':
+                raise ToolProviderCredentialValidationError("Invalid AWS Secret Access Key")
+            elif error_code == 'AuthFailure':
+                raise ToolProviderCredentialValidationError("AWS authentication failed")
+            else:
+                raise ToolProviderCredentialValidationError(f"AWS SNS error: {str(e)}")
+        except BotoCoreError as e:
+            raise ToolProviderCredentialValidationError(f"AWS connection error: {str(e)}")
         except Exception as e:
             raise ToolProviderCredentialValidationError(str(e))
 
