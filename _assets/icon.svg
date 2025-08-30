@@ -1,55 +1,46 @@
-<!--
-  ~ Dify Marketplace Template Icon
-  ~ Dify 市场模板图标
-  ~ Dify マーケットプレイステンプレートアイコン
-  ~
-  ~ WARNING / 警告 / 警告:
-  ~ 
-  ~ English: This is a TEMPLATE icon from Dify Marketplace only. You MUST NOT use this default icon in any way.
-  ~ Please replace it with your own custom icon before submit this plugin.
-  ~ 
-  ~ 中文: 这只是来自 Dify 市场的模板图标。您绝对不能以任何方式使用此默认图标。
-  ~ 请在提交此插件之前将其替换为您自己的自定义图标。
-  ~ 
-  ~ 日本語: これは Dify マーケットプレイスのテンプレートアイコンです。このデフォルトアイコンをいかなる方法でも使用してはいけません。
-  ~ このプラグインを提出する前に、独自のカスタムアイコンに置き換えてください。
-  ~ 
-  ~ DIFY_MARKETPLACE_TEMPLATE_ICON_DO_NOT_USE
-  -->
+<!-- AWS SNS Email Notification Icon -->
 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_15255_46435)">
-<rect width="40" height="40" fill="#0033FF"/>
-<g filter="url(#filter0_n_15255_46435)">
-<rect width="40" height="40" fill="url(#paint0_linear_15255_46435)"/>
-</g>
-<path d="M28 10C28.5523 10 29 10.4477 29 11V16C29 16.5523 28.5523 17 28 17H23V30C23 30.5523 22.5523 31 22 31H18C17.4477 31 17 30.5523 17 30V17H11.5C10.9477 17 10.5 16.5523 10.5 16V13.618C10.5 13.2393 10.714 12.893 11.0528 12.7236L16.5 10H28ZM23 12H16.9721L12.5 14.2361V15H19V29H21V15H23V12ZM27 12H25V15H27V12Z" fill="white"/>
-</g>
-<defs>
-<filter id="filter0_n_15255_46435" x="0" y="0" width="40" height="40" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feTurbulence type="fractalNoise" baseFrequency="2 2" stitchTiles="stitch" numOctaves="3" result="noise" seed="8033" />
-<feComponentTransfer in="noise" result="coloredNoise1">
-<feFuncR type="linear" slope="2" intercept="-0.5" />
-<feFuncG type="linear" slope="2" intercept="-0.5" />
-<feFuncB type="linear" slope="2" intercept="-0.5" />
-<feFuncA type="discrete" tableValues="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "/>
-</feComponentTransfer>
-<feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped" />
-<feComponentTransfer in="noise1Clipped" result="color1">
-<feFuncA type="table" tableValues="0 0.06" />
-</feComponentTransfer>
-<feMerge result="effect1_noise_15255_46435">
-<feMergeNode in="shape" />
-<feMergeNode in="color1" />
-</feMerge>
-</filter>
-<linearGradient id="paint0_linear_15255_46435" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-<stop stop-color="#1F4CFF"/>
-<stop offset="1" stop-color="#0033FF"/>
-</linearGradient>
-<clipPath id="clip0_15255_46435">
-<rect width="40" height="40" fill="white"/>
-</clipPath>
-</defs>
+  <!-- AWS Orange Background with gradient -->
+  <defs>
+    <linearGradient id="awsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9900;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EC7211;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <rect width="40" height="40" rx="6" fill="url(#awsGradient)"/>
+  
+  <!-- Main envelope (centered, larger) -->
+  <g transform="translate(20, 18)">
+    <g transform="translate(-12, -9)">
+      <!-- Envelope body -->
+      <rect x="0" y="2" width="24" height="16" rx="2" fill="white" stroke="#232F3E" stroke-width="1.5" filter="url(#shadow)"/>
+      
+      <!-- Envelope flap (open) -->
+      <path d="M0 4 L12 14 L24 4" stroke="#232F3E" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      
+      <!-- Email content lines -->
+      <line x1="4" y1="7" x2="11" y2="7" stroke="#232F3E" stroke-width="1" opacity="0.4"/>
+      <line x1="4" y1="10" x2="17" y2="10" stroke="#232F3E" stroke-width="1" opacity="0.4"/>
+      <line x1="4" y1="13" x2="14" y2="13" stroke="#232F3E" stroke-width="1" opacity="0.4"/>
+    </g>
+  </g>
+  
+  <!-- Notification badge (right side, even bigger) -->
+  <g transform="translate(28, 11)">
+    <circle cx="0" cy="0" r="6" fill="#FF0000" stroke="white" stroke-width="1.5"/>
+    <text x="0" y="2.5" text-anchor="middle" fill="white" font-size="10" font-weight="bold">!</text>
+  </g>
+  
+  <!-- AWS Cloud symbol (left side, stretched horizontally and overlapping) -->
+  <g transform="translate(2, 18) scale(2.2, 1.8)">
+    <path d="M10 6.5C10 4.567 8.433 3 6.5 3C4.567 3 3 4.567 3 6.5C3 6.598 3.004 6.695 3.011 6.791C2.005 7.047 1.2 7.888 1.2 8.975C1.2 10.257 2.318 11.3 3.75 11.3H9.25C10.682 11.3 11.8 10.257 11.8 8.975C11.8 7.901 11.01 7.021 9.966 6.767C9.989 6.679 10 6.59 10 6.5Z" 
+          fill="white" 
+          fill-opacity="0.9"
+          stroke="#232F3E"
+          stroke-width="0.5"/>
+  </g>
 </svg>
