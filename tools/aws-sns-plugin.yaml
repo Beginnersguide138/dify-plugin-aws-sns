@@ -1,0 +1,30 @@
+identity:
+  name: "aws-sns-plugin"
+  author: "beginnersguide138"
+  label:
+    en_US: "aws-sns-plugin"
+    zh_Hans: "aws-sns-plugin"
+    pt_BR: "aws-sns-plugin"
+description:
+  human:
+    en_US: "A plugin that connects to AWS SNS Topic."
+    zh_Hans: "A plugin that connects to AWS SNS Topic."
+    pt_BR: "A plugin that connects to AWS SNS Topic."
+  llm: "A plugin that connects to AWS SNS Topic."
+parameters:
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Query string
+      zh_Hans: 查询语句
+      pt_BR: Query string
+    human_description:
+      en_US: "A plugin that connects to AWS SNS Topic."
+      zh_Hans: "A plugin that connects to AWS SNS Topic."
+      pt_BR: "A plugin that connects to AWS SNS Topic."
+    llm_description: "A plugin that connects to AWS SNS Topic."
+    form: llm
+extra:
+  python:
+    source: tools/aws-sns-plugin.py
