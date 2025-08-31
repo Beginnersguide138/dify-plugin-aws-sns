@@ -1,27 +1,48 @@
-# AWS SNS Email Notification Plugin for Dify
+# AWS SNSメール通知プラグイン（Dify用）
 
-**Author:** beginnersguide138
-**Version:** 0.0.1
-**Type:** tool
+<p align="center">
+  <img src="./_assets/icon.svg" alt="AWS SNS Plugin Icon" width="120">
+</p>
 
-A Dify plugin that enables sending email notifications through AWS Simple Notification Service (SNS) using IAM authentication.
+<p align="center">
+  <a href="https://github.com/Beginnersguide138/dify-plugin-aws-sns/releases">
+    <img src="https://img.shields.io/github/v/release/Beginnersguide138/dify-plugin-aws-sns?style=for-the-badge" alt="GitHub release">
+  </a>
+  <a href="https://github.com/Beginnersguide138/dify-plugin-aws-sns/issues">
+    <img src="https://img.shields.io/github/issues/Beginnersguide138/dify-plugin-aws-sns?style=for-the-badge" alt="GitHub issues">
+  </a>
+  <a href="https://github.com/Beginnersguide138/dify-plugin-aws-sns/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/Beginnersguide138/dify-plugin-aws-sns?style=for-the-badge" alt="GitHub license">
+  </a>
+</p>
 
-## Features
+**作者:** beginnersguide138
+**バージョン:** 0.0.2
+**タイプ:** tool
 
-- Send email notifications via AWS SNS
-- Support for both SNS Topics and direct email sending
-- IAM-based authentication for secure access
-- Multi-language support (English, Japanese, Chinese, Portuguese)
+このDifyプラグインは、AWS Simple Notification Service (SNS) を使用してIAM認証によりEメール通知を送信できる機能を提供します。
 
-## Prerequisites
+📄 **[English README](./readme/README_en.md)**
+📄 **[中文说明](./readme/README_zh_CN.md)**
 
-- AWS Account with SNS service enabled
-- IAM user with appropriate SNS permissions
-- AWS Access Key ID and Secret Access Key
+---
 
-## Required AWS IAM Permissions
+## 機能
 
-The IAM user needs the following permissions:
+- AWS SNSを介したEメール通知送信
+- SNSトピック宛および直接メール送信の両方をサポート
+- セキュアアクセスのためのIAM認証
+- 多言語対応（英語、日本語、中国語、ポルトガル語）
+
+## 前提条件
+
+- SNSサービスが有効なAWSアカウント
+- 必要なSNS権限を持つIAMユーザー
+- AWSアクセスキーIDとシークレットアクセスキー
+
+## 必要なIAM権限
+
+IAMユーザーは以下の権限を持つ必要があります：
 
 ```json
 {
@@ -41,95 +62,92 @@ The IAM user needs the following permissions:
 }
 ```
 
-## Installation
+## インストール
 
-1. Install the plugin in your Dify instance
-2. Configure the AWS credentials in the plugin settings:
-   - AWS Access Key ID
-   - AWS Secret Access Key
-   - AWS Region (e.g., us-east-1, ap-northeast-1)
+1. Difyインスタンスにプラグインをインストール
+2. プラグイン設定でAWS認証情報を入力：
+   - AWSアクセスキーID
+   - AWSシークレットアクセスキー
+   - AWSリージョン（例: us-east-1, ap-northeast-1）
 
-## Usage
+## 使い方
 
-### Sending Email via SNS Topic
+### SNSトピック経由でメール送信
 
-If you have an existing SNS topic with email subscribers:
+既存のSNSトピック（メール購読者あり）がある場合：
 
 ```
-Tool: Send Email via SNS
-Parameters:
+ツール: Send Email via SNS
+パラメータ:
 - topic_arn: arn:aws:sns:region:account-id:topic-name
-- subject: "Your Email Subject"
-- message: "Your email message body"
+- subject: "メール件名"
+- message: "メール本文"
 ```
 
-### Sending Direct Email
+### 直接メール送信
 
-To send email directly to a recipient:
+特定の受信者に直接送信する場合：
 
 ```
-Tool: Send Email via SNS
-Parameters:
+ツール: Send Email via SNS
+パラメータ:
 - email: recipient@example.com
-- subject: "Your Email Subject"
-- message: "Your email message body"
+- subject: "メール件名"
+- message: "メール本文"
 ```
 
-**Note:** When sending to a new email address, the recipient will first receive a confirmation email from AWS SNS. They must confirm the subscription before receiving notifications.
+**注意:** 新しいメールアドレスに送信する場合、AWS SNSから購読確認メールが届きます。受信者が購読を承認するまで通知は送信されません。
 
-## Configuration
+## 設定
 
-### Environment Variables (for development)
+### 環境変数（開発用）
 
-Create a `.env` file based on `.env.example`:
+`.env.example`をもとに`.env`ファイルを作成：
 
 ```bash
 cp .env.example .env
 ```
 
-Then edit the `.env` file with your credentials.
+その後、認証情報を設定します。
 
-### Testing Locally
+### ローカルテスト
 
 ```bash
-# Install dependencies
+# 依存関係のインストール
 pip install -r requirements.txt
 
-# Run the plugin
+# プラグインを実行
 python -m main
 ```
 
-## Security Considerations
+## セキュリティ上の注意
 
-- Never commit AWS credentials to version control
-- Use IAM roles with minimal required permissions
-- Consider using AWS STS for temporary credentials in production
-- Enable SNS encryption for sensitive data
+- AWS認証情報をバージョン管理に含めない
+- 必要最小限の権限を持つIAMロールを使用
+- 本番環境では一時認証情報（AWS STS）の利用を検討
+- 機密データのSNS暗号化を有効化
 
-## Troubleshooting
+## トラブルシューティング
 
-### Common Issues
+### よくある問題
 
-1. **Invalid credentials error**
-   - Verify your AWS Access Key ID and Secret Access Key
-   - Check that the IAM user has the required permissions
+1. **Invalid credentials error（認証エラー）**
+   - AWSアクセスキーIDとシークレットアクセスキーを確認
+   - IAMユーザーに必要な権限が付与されているか確認
 
-2. **Topic not found error**
-   - Ensure the topic ARN is correct
-   - Verify the topic exists in the specified region
+2. **Topic not found error（トピックが見つからない）**
+   - トピックARNが正しいか確認
+   - 指定リージョンにトピックが存在するか確認
 
-3. **Email not received**
-   - Check if the recipient has confirmed the SNS subscription
-   - Verify the email address is valid
-   - Check spam/junk folders
+3. **Email not received（メール未着）**
+   - 受信者がSNS購読を承認しているか確認
+   - メールアドレスが有効か確認
+   - スパム/迷惑メールフォルダを確認
 
-## Support
+## サポート
 
-For issues and questions, please visit: https://github.com/Beginnersguide138/dify-plugin-aws-sns/issues
+質問や不具合は以下へ: https://github.com/Beginnersguide138/dify-plugin-aws-sns/issues
 
-## License
+## ライセンス
 
-MIT License - see LICENSE file for details
-
-
-
+MIT License - 詳細はLICENSEファイル参照
